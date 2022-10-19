@@ -1,6 +1,4 @@
 version: 2.1
-orbs:
-    node: circleci/node@5.0.2
 
 jobs:
     deploy:
@@ -33,7 +31,7 @@ jobs:
             - run:
                   name: test GET Hello World API
                   command: |
-                      endpoint=$(terraform show -json plan.file | jq '.planned_values.outputs.get_api_endpoint.value' | tr -d '"');
+                      endpoint=$(terraform show -json | jq '.values.outputs.get_api_endpoint.value' | tr -d '"');
                       echo $endpoint;
                       curl $endpoint
 

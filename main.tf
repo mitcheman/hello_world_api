@@ -3,7 +3,7 @@ terraform {
 
   backend "s3" {
     bucket = "terraform-state-01010101"
-    key    = "state/"
+    key    = "state/helloworld_state"
     region = "us-east-1"
   }
 
