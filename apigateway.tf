@@ -16,10 +16,21 @@ resource "aws_apigatewayv2_integration" "hello_world" {
 resource "aws_apigatewayv2_stage" "hello_world_api_v1" {
   api_id = aws_apigatewayv2_api.hello_world.id
   name   = "v1"
+  auto_deploy = true
 }
 
 resource "aws_apigatewayv2_route" "hello_world_get_route" {
   api_id    = aws_apigatewayv2_api.hello_world.id
   route_key = "GET /helloworld"
   target    = "integrations/${aws_apigatewayv2_integration.hello_world.id}"
+}
+
+resource "aws_lambda_permission" "lambda_permission" {
+  action        = "lambda:InvokeFunction"
+  function_name = "helloworld"
+  principal     = "apigateway.amazonaws.com"
+
+  # The /*/*/* part allows invocation from any stage, method and resource path
+  # within API Gateway REST API.
+  source_arn = "${aws_apigatewayv2_api.hello_world.execution_arn}/*/*/*"
 }
