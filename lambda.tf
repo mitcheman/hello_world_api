@@ -1,5 +1,5 @@
 
-resource "aws_lambda_function" "hello_world_lambda_function" {
+resource "aws_lambda_function" "hello_world" {
 
   filename      = "helloworld.zip"
   function_name = "helloworld"

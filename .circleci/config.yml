@@ -21,15 +21,14 @@ jobs:
                   command: |
                       terraform init -input=false
                       terraform plan -input=false -compact-warnings -out=plan.file
-                      terraform apply -input=false -compact-warnings -auto-approve
 
-            # - store_artifacts:
-            #       path: plan.file
+            - store_artifacts:
+                  path: plan.file
 
-            # - run:
-            #       name: terraform apply
-            #       command: |
-            #           terraform apply -input=false -compact-warnings plan.file
+            - run:
+                  name: terraform apply
+                  command: |
+                      terraform apply -input=false -compact-warnings "plan.file"
 
 workflows:
     build:
