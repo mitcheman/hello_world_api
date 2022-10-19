@@ -1,5 +1,5 @@
 resource "aws_iam_role" "role_for_lambda" {
-  name = "iam_for_lambda"
+  name = "role_for_lambda"
 
   assume_role_policy = <<EOF
 {
@@ -19,6 +19,6 @@ EOF
 }
 
 resource "aws_iam_role_policy_attachment" "lambda_execution_role" {
-  policy_arn = "arn:aws:iam::aws:policy/AWSLambdaBasicExecutionRole"
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaRole"
   role       = aws_iam_role.role_for_lambda.name
 }
